@@ -32,10 +32,6 @@ jobs:
         with:
           path: orbis-launcher
           persist-credentials: false
-      - name: Require application registration
-        env:
-          ORBIS_MSA_CLIENT_ID: ${{ secrets.ORBIS_MSA_CLIENT_ID }}
-        run: test -n "$ORBIS_MSA_CLIENT_ID"
       - name: Test orchestration
         run: python3 -m unittest discover -s orbis-launcher/tools/tests -v
       - name: Require pinned runtime and library releases
@@ -45,8 +41,6 @@ jobs:
     needs: checks
     runs-on: ubuntu-24.04
     timeout-minutes: 350
-    env:
-      ORBIS_MSA_CLIENT_ID: ${{ secrets.ORBIS_MSA_CLIENT_ID }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
